@@ -6,7 +6,7 @@
 package service;
 
 import dao.IDao;
-import entities.Machine;
+import entities.Classroom;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -15,14 +15,14 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
-public class MachineService extends UnicastRemoteObject implements IDao<Machine> {
+public class ClassroomService extends UnicastRemoteObject implements IDao<Classroom> {
 
-    public MachineService() throws RemoteException {
+    public ClassroomService() throws RemoteException {
         super();
     }
 
     @Override
-    public boolean create(Machine o) throws RemoteException {
+    public boolean create(Classroom o) throws RemoteException {
         Session session = null;
         Transaction tx = null;
         boolean state = false;
@@ -46,7 +46,7 @@ public class MachineService extends UnicastRemoteObject implements IDao<Machine>
     }
 
     @Override
-    public boolean update(Machine o) throws RemoteException {
+    public boolean update(Classroom o) throws RemoteException {
         Session session = null;
         Transaction tx = null;
         boolean state = false;
@@ -70,7 +70,7 @@ public class MachineService extends UnicastRemoteObject implements IDao<Machine>
     }
 
     @Override
-    public boolean delete(Machine o) throws RemoteException {
+    public boolean delete(Classroom o) throws RemoteException {
         Session session = null;
         Transaction tx = null;
         boolean state = false;
@@ -94,14 +94,14 @@ public class MachineService extends UnicastRemoteObject implements IDao<Machine>
     }
 
     @Override
-    public Machine findById(int id) throws RemoteException {
+    public Classroom findById(int id) throws RemoteException {
         Session session = null;
         Transaction tx = null;
-        Machine machine = null;
+        Classroom classroom = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            machine = (Machine) session.get(Machine.class, id);
+            classroom = (Classroom) session.get(Classroom.class, id);
             tx.commit();
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
@@ -113,18 +113,18 @@ public class MachineService extends UnicastRemoteObject implements IDao<Machine>
                 session.close();
             }
         }
-        return machine;
+        return classroom;
     }
 
     @Override
-    public List<Machine> findAll() throws RemoteException {
+    public List<Classroom> findAll() throws RemoteException {
         Session session = null;
         Transaction tx = null;
-        List<Machine> machines = null;
+        List<Classroom> classrooms = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            machines = session.getNamedQuery("findAllMachinesNative").list();
+            classrooms = session.getNamedQuery("findAllClassroomsNative").list();
             tx.commit();
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
@@ -136,6 +136,6 @@ public class MachineService extends UnicastRemoteObject implements IDao<Machine>
                 session.close();
             }
         }
-        return machines;
+        return classrooms;
     }
 }

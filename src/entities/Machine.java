@@ -14,9 +14,10 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQuery(name = "findAll", query = "from Machine")
-@NamedNativeQuery(name = "findAllNative", query = "select * from machine", resultClass = Machine.class)
+@NamedQuery(name = "findAllMachines", query = "from Machine")
+@NamedNativeQuery(name = "findAllMachinesNative", query = "select * from machine", resultClass = Machine.class)
 public class Machine implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
